@@ -1084,7 +1084,7 @@ export class KotlinXRenderer extends KotlinRenderer {
         this.emitBlock(["enum class ", enumName, "(val value: String)"], () => {
             let count = e.cases.size;
             this.forEachEnumCase(e, "none", (name, json) => {
-                this.emitLine(name, `("${stringEscape(json)}")`, --count === 0 ? ";" : ",");
+                this.emitLine(name, `@SerialName("${stringEscape(json)}")  `, `("${stringEscape(json)}")`, name, --count === 0 ? ";" : ",");
             });
             this.ensureBlankLine();
             this.emitBlock(["companion object : KSerializer<", enumName, ">"], () => {
